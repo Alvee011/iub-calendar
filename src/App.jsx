@@ -140,40 +140,40 @@ function App() {
                   <button
                     key={event.id}
                     onClick={() => handleSearchResultClick(event)}
-                    className="group bg-white rounded-2xl p-5 border border-slate-200 hover:border-iub-blue/50 hover:shadow-md transition-all text-left flex flex-col gap-4 relative overflow-hidden"
+                    className="group bg-white rounded-xl p-3 border border-slate-200 hover:border-iub-blue/50 hover:shadow-md transition-all text-left flex flex-col gap-3 relative overflow-hidden"
                   >
-                    <div className={`absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity ${event.color.split(' ')[2]}`}>
-                      <Calendar size={64} />
+                    <div className={`absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity ${event.color.split(' ')[2]}`}>
+                      <Calendar size={48} />
                     </div>
 
                     <div className="flex items-start justify-between relative z-10">
-                      <div className={cn("w-14 h-14 rounded-2xl flex flex-col items-center justify-center border shadow-sm", event.color)}>
-                        <span className="text-[10px] font-bold uppercase">{format(parseISO(event.startDate), 'MMM')}</span>
-                        <span className="text-xl font-bold leading-none">{format(parseISO(event.startDate), 'd')}</span>
+                      <div className={cn("w-12 h-12 rounded-xl flex flex-col items-center justify-center border shadow-sm", event.color)}>
+                        <span className="text-[9px] font-bold uppercase">{format(parseISO(event.startDate), 'MMM')}</span>
+                        <span className="text-lg font-bold leading-none">{format(parseISO(event.startDate), 'd')}</span>
                       </div>
-                      <div className="bg-slate-50 text-slate-500 p-2 rounded-full group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                        <ArrowRight size={18} />
+                      <div className="bg-slate-50 text-slate-500 p-1.5 rounded-full group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                        <ArrowRight size={16} />
                       </div>
                     </div>
 
                     <div className="relative z-10">
-                      <h3 className="font-bold text-lg text-slate-900 leading-tight mb-2 group-hover:text-iub-blue transition-colors">
+                      <h3 className="font-bold text-base text-slate-900 leading-tight mb-1.5 group-hover:text-iub-blue transition-colors">
                         {event.title}
                       </h3>
 
-                      <div className="flex items-center gap-2 text-xs text-slate-500 font-medium mb-3">
-                        <span className="bg-slate-50 px-2 py-1 rounded-md border border-slate-100 flex items-center gap-1.5">
-                          <Calendar size={12} className="text-slate-400" />
-                          {format(parseISO(event.startDate), 'MMMM d, yyyy')}
-                          {event.startDate !== event.endDate && ` – ${format(parseISO(event.endDate), 'MMMM d, yyyy')}`}
+                      <div className="flex items-center gap-2 text-xs text-slate-500 font-medium mb-2">
+                        <span className="bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100 flex items-center gap-1">
+                          <Calendar size={10} className="text-slate-400" />
+                          {format(parseISO(event.startDate), 'MMM d, yyyy')}
+                          {event.startDate !== event.endDate && ` – ${format(parseISO(event.endDate), 'MMM d, yyyy')}`}
                         </span>
                       </div>
 
-                      <div className="flex flex-wrap gap-2">
-                        <span className="inline-flex items-center text-xs font-medium text-slate-500 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
+                      <div className="flex flex-wrap gap-1.5">
+                        <span className="inline-flex items-center text-[10px] font-medium text-slate-500 bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100">
                           {event.semester}
                         </span>
-                        <span className={cn("inline-flex items-center text-xs font-medium px-2 py-1 rounded-md border", event.color)}>
+                        <span className={cn("inline-flex items-center text-[10px] font-medium px-1.5 py-0.5 rounded border", event.color)}>
                           {event.type}
                         </span>
                       </div>

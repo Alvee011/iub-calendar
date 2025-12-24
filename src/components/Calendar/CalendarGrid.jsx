@@ -19,7 +19,7 @@ export default function CalendarGrid({ currentMonth, events, onEventClick }) {
                     <div
                         key={day}
                         className={cn(
-                            "py-3 text-center text-sm font-bold uppercase tracking-wider",
+                            "py-2 text-center text-xs font-bold uppercase tracking-wider",
                             day === 'Fri' ? "bg-[#ffe4e6] text-red-600" : "text-black"
                         )}
                     >
@@ -52,25 +52,25 @@ export default function CalendarGrid({ currentMonth, events, onEventClick }) {
                         <div
                             key={day.toString()}
                             className={cn(
-                                "min-h-[100px] sm:min-h-[120px] p-1 sm:p-2 border-b border-r border-slate-100 flex flex-col relative transition-colors hover:bg-slate-50/50",
+                                "min-h-[65px] sm:min-h-[90px] p-1 border-b border-r border-slate-100 flex flex-col relative transition-colors hover:bg-slate-50/50",
                                 !isSameMonth(day, monthStart) && "bg-slate-50/30 text-slate-400",
                                 isToday(day) && "bg-blue-50/30"
                             )}
                         >
                             <span className={cn(
-                                "w-7 h-7 flex items-center justify-center rounded-full text-sm font-medium mb-1",
+                                "w-6 h-6 flex items-center justify-center rounded-full text-xs sm:text-sm font-medium mb-1",
                                 isToday(day) ? "bg-iub-blue text-white" : "text-slate-700"
                             )}>
                                 {format(day, 'd')}
                             </span>
 
-                            <div className="flex-1 flex flex-col gap-1 overflow-y-auto max-h-[80px] no-scrollbar">
+                            <div className="flex-1 flex flex-col gap-0.5 overflow-y-auto max-h-[60px] no-scrollbar">
                                 {todaysEvents.map((event) => (
                                     <button
                                         key={event.id + day.toISOString()} // unique key for span
                                         onClick={(e) => { e.stopPropagation(); onEventClick(event); }}
                                         className={cn(
-                                            "text-left text-[10px] sm:text-xs px-1.5 py-1 rounded border truncate w-full shadow-sm transition-transform hover:scale-[1.02] active:scale-95",
+                                            "text-left text-[10px] px-1.5 py-0.5 rounded border truncate w-full shadow-sm transition-transform hover:scale-[1.02] active:scale-95",
                                             event.color,
                                             "opacity-90 hover:opacity-100"
                                         )}

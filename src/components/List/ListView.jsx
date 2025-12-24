@@ -25,19 +25,19 @@ export default function ListView({ events, onEventClick }) {
                             <button
                                 key={event.id}
                                 onClick={() => onEventClick(event)}
-                                className="w-full flex items-center gap-4 p-4 hover:bg-slate-50 transition-colors text-left group"
+                                className="w-full flex items-center gap-3 p-3 hover:bg-slate-50 transition-colors text-left group"
                             >
-                                <div className={cn("shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center border shadow-sm", event.color)}>
-                                    <span className="text-xs font-bold uppercase tracking-wide">{format(parseISO(event.startDate), 'MMM')}</span>
-                                    <span className="text-xl font-bold leading-none mt-0.5">{format(parseISO(event.startDate), 'd')}</span>
+                                <div className={cn("shrink-0 w-12 h-12 rounded-xl flex flex-col items-center justify-center border shadow-sm", event.color)}>
+                                    <span className="text-[10px] font-bold uppercase tracking-wide">{format(parseISO(event.startDate), 'MMM')}</span>
+                                    <span className="text-lg font-bold leading-none mt-0.5">{format(parseISO(event.startDate), 'd')}</span>
                                 </div>
 
                                 <div className="flex-1 min-w-0">
-                                    <h4 className="font-semibold text-slate-900 truncate group-hover:text-iub-blue transition-colors">
+                                    <h4 className="font-semibold text-slate-900 truncate group-hover:text-iub-blue transition-colors text-sm sm:text-base">
                                         {event.title}
                                     </h4>
-                                    <div className="flex items-center gap-2 mt-1 text-sm text-slate-500">
-                                        <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-bold uppercase", event.color)}>
+                                    <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-500">
+                                        <span className={cn("px-1.5 py-0.5 rounded-full text-[10px] font-bold uppercase", event.color)}>
                                             {event.type}
                                         </span>
                                         <span>•</span>
@@ -51,7 +51,7 @@ export default function ListView({ events, onEventClick }) {
                                     </div>
                                 </div>
 
-                                <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-slate-500 transition-colors" />
+                                <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-500 transition-colors" />
                             </button>
                         ))}
                     </div>

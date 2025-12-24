@@ -8,7 +8,7 @@ export default function MonthView({ currentMonth, setCurrentMonth, events, onEve
     const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-2">
             <div className="flex items-center justify-between px-2">
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
                     {format(currentMonth, 'MMMM yyyy')}

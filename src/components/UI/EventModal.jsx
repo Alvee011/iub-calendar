@@ -14,29 +14,29 @@ export default function EventModal({ event, isOpen, onClose }) {
             <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
 
                 {/* Header with dynamic color - Fixed */}
-                <div className={`h-24 shrink-0 ${event.color.split(' ')[0]} relative`}>
+                <div className={`h-20 shrink-0 ${event.color.split(' ')[0]} relative`}>
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/40 rounded-full transition-colors text-slate-800"
+                        className="absolute top-3 right-3 p-1.5 bg-white/20 hover:bg-white/40 rounded-full transition-colors text-slate-800"
                     >
-                        <X size={20} />
+                        <X size={18} />
                     </button>
                 </div>
 
                 {/* Scrollable Content */}
-                <div className="px-6 py-6 -mt-12 relative overflow-y-auto flex-1 custom-scrollbar">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-lg mb-4 ${event.color} bg-white sticky top-0 z-10`}>
-                        <Calendar size={32} className={event.color.split(' ')[2]} />
+                <div className="px-5 py-4 -mt-10 relative overflow-y-auto flex-1 custom-scrollbar">
+                    <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl shadow-lg mb-3 ${event.color} bg-white sticky top-0 z-10`}>
+                        <Calendar size={28} className={event.color.split(' ')[2]} />
                     </div>
 
-                    <h2 className="text-2xl font-bold text-slate-900 mb-2">{event.title}</h2>
+                    <h2 className="text-xl font-bold text-slate-900 mb-2">{event.title}</h2>
 
-                    <div className="space-y-4 mt-6">
+                    <div className="space-y-3 mt-4">
                         <div className="flex items-start gap-3">
-                            <Clock className="w-5 h-5 text-slate-400 mt-0.5" />
+                            <Clock className="w-4 h-4 text-slate-400 mt-0.5" />
                             <div>
-                                <p className="text-sm font-medium text-slate-900">Date</p>
-                                <p className="text-slate-600">
+                                <p className="text-xs font-medium text-slate-900">Date</p>
+                                <p className="text-sm text-slate-600">
                                     {format(startDate, 'MMMM d, yyyy')}
                                     {!isOneDay && ` – ${format(endDate, 'MMMM d, yyyy')}`}
                                 </p>
@@ -44,14 +44,14 @@ export default function EventModal({ event, isOpen, onClose }) {
                         </div>
 
                         <div className="flex items-start gap-3">
-                            <Tag className="w-5 h-5 text-slate-400 mt-0.5" />
+                            <Tag className="w-4 h-4 text-slate-400 mt-0.5" />
                             <div>
-                                <p className="text-sm font-medium text-slate-900">Type</p>
+                                <p className="text-xs font-medium text-slate-900">Type</p>
                                 <div className="flex gap-2 mt-1">
-                                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${event.color}`}>
+                                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${event.color}`}>
                                         {event.type}
                                     </span>
-                                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium border bg-slate-100 border-slate-200 text-slate-600">
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-medium border bg-slate-100 border-slate-200 text-slate-600">
                                         {event.semester}
                                     </span>
                                 </div>
@@ -59,17 +59,17 @@ export default function EventModal({ event, isOpen, onClose }) {
                         </div>
 
                         {event.schedule && (
-                            <div className="mt-4 border-t border-slate-100 pt-4">
-                                <p className="text-sm font-medium text-slate-900 mb-3">Detailed Schedule</p>
-                                <div className="space-y-4">
+                            <div className="mt-3 border-t border-slate-100 pt-3">
+                                <p className="text-xs font-medium text-slate-900 mb-2">Detailed Schedule</p>
+                                <div className="space-y-2">
                                     {event.schedule.map((day, idx) => (
-                                        <div key={idx} className="bg-slate-50 rounded-lg p-3 border border-slate-100">
-                                            <h4 className="font-semibold text-slate-800 text-sm mb-2 pb-2 border-b border-slate-200">
+                                        <div key={idx} className="bg-slate-50 rounded-lg p-2 border border-slate-100">
+                                            <h4 className="font-semibold text-slate-800 text-xs mb-1.5 pb-1.5 border-b border-slate-200">
                                                 {day.date}
                                             </h4>
-                                            <div className="space-y-1.5">
+                                            <div className="space-y-1">
                                                 {day.slots.map((slot, sIdx) => (
-                                                    <div key={sIdx} className="flex justify-between text-xs sm:text-sm">
+                                                    <div key={sIdx} className="flex justify-between text-xs">
                                                         <span className="text-slate-500 font-medium">{slot.time}</span>
                                                         <span className="text-slate-800 text-right">{slot.criteria}</span>
                                                     </div>
