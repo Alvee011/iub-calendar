@@ -60,7 +60,7 @@ function App() {
                 placeholder="Search events (e.g. 'Exam', 'Eid')..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-100 border-transparent focus:bg-white focus:border-iub-blue focus:ring-4 focus:ring-blue-500/10 rounded-xl text-sm font-medium transition-all"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-100 border-transparent focus:bg-white focus:border-iub-blue focus:ring-4 focus:ring-blue-500/10 rounded-xl text-base sm:text-sm font-medium transition-all"
               />
               {searchQuery && (
                 <button
