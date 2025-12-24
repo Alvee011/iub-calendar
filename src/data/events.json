@@ -1,0 +1,442 @@
+[
+    {
+        "id": "spring-reg-2026",
+        "title": "Course registration for Spring 2026",
+        "semester": "Spring",
+        "type": "Registration",
+        "startDate": "2026-01-11",
+        "endDate": "2026-01-13",
+        "color": "bg-cyan-100 border-cyan-200 text-cyan-800",
+        "schedule": [
+            {
+                "date": "11 January 2026",
+                "slots": [
+                    {
+                        "time": "09:45am – 11:00am",
+                        "criteria": "105 Credit hours and above"
+                    },
+                    {
+                        "time": "11:20am – 12:35pm",
+                        "criteria": "85-104 Credit hours"
+                    },
+                    {
+                        "time": "12:55pm – 2:10pm",
+                        "criteria": "70-84 Credit hours"
+                    },
+                    {
+                        "time": "2:30pm – 3:45pm",
+                        "criteria": "55-69 Credit hours"
+                    }
+                ]
+            },
+            {
+                "date": "12 January 2026",
+                "slots": [
+                    {
+                        "time": "09:45am – 11:00am",
+                        "criteria": "40-54 Credit hours"
+                    },
+                    {
+                        "time": "11:20am – 12:35pm",
+                        "criteria": "30-39 Credit hours"
+                    },
+                    {
+                        "time": "12:55pm – 2:10pm",
+                        "criteria": "16-29 Credit hours"
+                    },
+                    {
+                        "time": "2:30pm – 3:45pm",
+                        "criteria": "0 - 15 Credit hours"
+                    }
+                ]
+            },
+            {
+                "date": "13 January 2026",
+                "slots": [
+                    {
+                        "time": "10:30am - 3:00pm",
+                        "criteria": "Reserved"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "spring-classes-start-2026",
+        "title": "Classes commence",
+        "semester": "Spring",
+        "type": "Academic",
+        "startDate": "2026-01-17",
+        "endDate": "2026-01-17",
+        "color": "bg-blue-100 border-blue-200 text-blue-800"
+    },
+    {
+        "id": "spring-payment-2026",
+        "title": "Due date for payment of Registration Fees, Spring 2026",
+        "semester": "Spring",
+        "type": "Payment",
+        "startDate": "2026-01-19",
+        "endDate": "2026-01-19",
+        "color": "bg-stone-100 border-stone-200 text-stone-800"
+    },
+    {
+        "id": "shab-e-barat-2026",
+        "title": "Shab-E-Barat**",
+        "semester": "Spring",
+        "type": "Holiday",
+        "startDate": "2026-02-04",
+        "endDate": "2026-02-04",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "shaheed-day-2026",
+        "title": "Shaheed Day*",
+        "semester": "Spring",
+        "type": "Holiday",
+        "startDate": "2026-02-21",
+        "endDate": "2026-02-21",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "spring-midterm-2026",
+        "title": "Mid-term exams",
+        "semester": "Spring",
+        "type": "Exam",
+        "startDate": "2026-02-22",
+        "endDate": "2026-03-05",
+        "color": "bg-pink-100 border-pink-200 text-pink-800"
+    },
+    {
+        "id": "eid-ul-fitr-2026",
+        "title": "Laylatul Qadr, Eid-ul-Fitr**",
+        "semester": "Spring",
+        "type": "Holiday",
+        "startDate": "2026-03-17",
+        "endDate": "2026-03-23",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "independence-day-2026",
+        "title": "Independence & National Day*",
+        "semester": "Spring",
+        "type": "Holiday",
+        "startDate": "2026-03-26",
+        "endDate": "2026-03-26",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "spring-withdraw-2026",
+        "title": "Last date of withdrawal from courses",
+        "semester": "Spring",
+        "type": "Academic",
+        "startDate": "2026-04-02",
+        "endDate": "2026-04-02",
+        "color": "bg-orange-100 border-orange-200 text-orange-800"
+    },
+    {
+        "id": "spring-eval-2026",
+        "title": "Faculty Evaluation",
+        "semester": "Spring",
+        "type": "Academic",
+        "startDate": "2026-04-07",
+        "endDate": "2026-04-09",
+        "color": "bg-blue-50 border-blue-200 text-blue-600"
+    },
+    {
+        "id": "bangla-new-year-2026",
+        "title": "Bangla New Year*",
+        "semester": "Spring",
+        "type": "Holiday",
+        "startDate": "2026-04-14",
+        "endDate": "2026-04-14",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "spring-classes-end-2026",
+        "title": "Classes end",
+        "semester": "Spring",
+        "type": "Academic",
+        "startDate": "2026-04-16",
+        "endDate": "2026-04-16",
+        "color": "bg-blue-100 border-blue-200 text-blue-800"
+    },
+    {
+        "id": "spring-finals-2026",
+        "title": "Final exams",
+        "semester": "Spring",
+        "type": "Exam",
+        "startDate": "2026-04-18",
+        "endDate": "2026-04-23",
+        "color": "bg-purple-100 border-purple-200 text-purple-800"
+    },
+    {
+        "id": "spring-grades-2026",
+        "title": "Grades due & Official end of Spring 2026",
+        "semester": "Spring",
+        "type": "Academic",
+        "startDate": "2026-04-30",
+        "endDate": "2026-04-30",
+        "color": "bg-indigo-100 border-indigo-200 text-indigo-800"
+    },
+    {
+        "id": "may-day-2026",
+        "title": "May Day*, Budhha Purnima**",
+        "semester": "Summer",
+        "type": "Holiday",
+        "startDate": "2026-05-01",
+        "endDate": "2026-05-01",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "summer-reg-2026",
+        "title": "Course registration for Summer 2026",
+        "semester": "Summer",
+        "type": "Registration",
+        "startDate": "2026-05-10",
+        "endDate": "2026-05-12",
+        "color": "bg-cyan-100 border-cyan-200 text-cyan-800"
+    },
+    {
+        "id": "summer-classes-start-2026",
+        "title": "Classes commence",
+        "semester": "Summer",
+        "type": "Academic",
+        "startDate": "2026-05-16",
+        "endDate": "2026-05-16",
+        "color": "bg-emerald-100 border-emerald-200 text-emerald-800"
+    },
+    {
+        "id": "summer-payment-2026",
+        "title": "Due date for payment of Registration Fees, Summer 2026",
+        "semester": "Summer",
+        "type": "Payment",
+        "startDate": "2026-05-18",
+        "endDate": "2026-05-18",
+        "color": "bg-stone-100 border-stone-200 text-stone-800"
+    },
+    {
+        "id": "eid-ul-azha-2026",
+        "title": "Eid-Ul-Azha**",
+        "semester": "Summer",
+        "type": "Holiday",
+        "startDate": "2026-05-26",
+        "endDate": "2026-05-31",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "ashura-2026",
+        "title": "Ashura**",
+        "semester": "Summer",
+        "type": "Holiday",
+        "startDate": "2026-06-26",
+        "endDate": "2026-06-26",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "summer-midterm-2026",
+        "title": "Mid-term exams",
+        "semester": "Summer",
+        "type": "Exam",
+        "startDate": "2026-06-27",
+        "endDate": "2026-07-09",
+        "color": "bg-pink-100 border-pink-200 text-pink-800"
+    },
+    {
+        "id": "summer-withdraw-2026",
+        "title": "Last date of withdrawal from courses",
+        "semester": "Summer",
+        "type": "Academic",
+        "startDate": "2026-07-23",
+        "endDate": "2026-07-23",
+        "color": "bg-orange-100 border-orange-200 text-orange-800"
+    },
+    {
+        "id": "summer-eval-2026",
+        "title": "Faculty Evaluation",
+        "semester": "Summer",
+        "type": "Academic",
+        "startDate": "2026-08-04",
+        "endDate": "2026-08-08",
+        "color": "bg-emerald-50 border-emerald-200 text-emerald-600"
+    },
+    {
+        "id": "uprising-day-2026",
+        "title": "July Uprising Day",
+        "semester": "Summer",
+        "type": "Holiday",
+        "startDate": "2026-08-05",
+        "endDate": "2026-08-05",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "summer-classes-end-2026",
+        "title": "Classes end",
+        "semester": "Summer",
+        "type": "Academic",
+        "startDate": "2026-08-13",
+        "endDate": "2026-08-13",
+        "color": "bg-emerald-100 border-emerald-200 text-emerald-800"
+    },
+    {
+        "id": "summer-finals-2026",
+        "title": "Final exams",
+        "semester": "Summer",
+        "type": "Exam",
+        "startDate": "2026-08-15",
+        "endDate": "2026-08-20",
+        "color": "bg-purple-100 border-purple-200 text-purple-800"
+    },
+    {
+        "id": "eid-e-milad-2026",
+        "title": "Eid-e-Milad un-Nabi**",
+        "semester": "Summer",
+        "type": "Holiday",
+        "startDate": "2026-08-26",
+        "endDate": "2026-08-26",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "summer-grades-2026",
+        "title": "Grades due & Official end of Summer 2026",
+        "semester": "Summer",
+        "type": "Academic",
+        "startDate": "2026-08-27",
+        "endDate": "2026-08-27",
+        "color": "bg-indigo-100 border-indigo-200 text-indigo-800"
+    },
+    {
+        "id": "janmastami-2026",
+        "title": "Janmastami**",
+        "semester": "Autumn",
+        "type": "Holiday",
+        "startDate": "2026-09-04",
+        "endDate": "2026-09-04",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "autumn-reg-2026",
+        "title": "Course registration for Autumn 2026",
+        "semester": "Autumn",
+        "type": "Registration",
+        "startDate": "2026-09-06",
+        "endDate": "2026-09-08",
+        "color": "bg-cyan-100 border-cyan-200 text-cyan-800"
+    },
+    {
+        "id": "autumn-classes-start-2026",
+        "title": "Classes commence",
+        "semester": "Autumn",
+        "type": "Academic",
+        "startDate": "2026-09-12",
+        "endDate": "2026-09-12",
+        "color": "bg-amber-100 border-amber-200 text-amber-800"
+    },
+    {
+        "id": "autumn-payment-2026",
+        "title": "Due date for payment of Registration Fees, Autumn 2026",
+        "semester": "Autumn",
+        "type": "Payment",
+        "startDate": "2026-09-14",
+        "endDate": "2026-09-14",
+        "color": "bg-stone-100 border-stone-200 text-stone-800"
+    },
+    {
+        "id": "convocation-deadline-2026",
+        "title": "Last date of application for graduation for 27th Convocation",
+        "semester": "Autumn",
+        "type": "Academic",
+        "startDate": "2026-09-30",
+        "endDate": "2026-09-30",
+        "color": "bg-amber-50 border-amber-200 text-amber-600"
+    },
+    {
+        "id": "durga-puja-2026",
+        "title": "Durga Puja**",
+        "semester": "Autumn",
+        "type": "Holiday",
+        "startDate": "2026-10-20",
+        "endDate": "2026-10-21",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "autumn-midterm-2026",
+        "title": "Mid-term exams",
+        "semester": "Autumn",
+        "type": "Exam",
+        "startDate": "2026-10-24",
+        "endDate": "2026-11-05",
+        "color": "bg-pink-100 border-pink-200 text-pink-800"
+    },
+    {
+        "id": "autumn-withdraw-2026",
+        "title": "Last date of withdrawal from courses",
+        "semester": "Autumn",
+        "type": "Academic",
+        "startDate": "2026-11-19",
+        "endDate": "2026-11-19",
+        "color": "bg-orange-100 border-orange-200 text-orange-800"
+    },
+    {
+        "id": "autumn-eval-2026",
+        "title": "Faculty Evaluation",
+        "semester": "Autumn",
+        "type": "Academic",
+        "startDate": "2026-11-24",
+        "endDate": "2026-11-26",
+        "color": "bg-amber-50 border-amber-200 text-amber-600"
+    },
+    {
+        "id": "autumn-classes-end-2026",
+        "title": "Classes end",
+        "semester": "Autumn",
+        "type": "Academic",
+        "startDate": "2026-12-03",
+        "endDate": "2026-12-03",
+        "color": "bg-amber-100 border-amber-200 text-amber-800"
+    },
+    {
+        "id": "autumn-finals-2026",
+        "title": "Final exams",
+        "semester": "Autumn",
+        "type": "Exam",
+        "startDate": "2026-12-05",
+        "endDate": "2026-12-10",
+        "color": "bg-purple-100 border-purple-200 text-purple-800"
+    },
+    {
+        "id": "victory-day-2026",
+        "title": "Victory day*",
+        "semester": "Autumn",
+        "type": "Holiday",
+        "startDate": "2026-12-16",
+        "endDate": "2026-12-16",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "autumn-grades-2026",
+        "title": "Grades due & Official end of Autumn 2026",
+        "semester": "Autumn",
+        "type": "Academic",
+        "startDate": "2026-12-17",
+        "endDate": "2026-12-17",
+        "color": "bg-indigo-100 border-indigo-200 text-indigo-800"
+    },
+    {
+        "id": "christmas-2026",
+        "title": "Christmas day*",
+        "semester": "Autumn",
+        "type": "Holiday",
+        "startDate": "2026-12-25",
+        "endDate": "2026-12-25",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
+        "id": "winter-break-2026",
+        "title": "University recess",
+        "semester": "Autumn",
+        "type": "Holiday",
+        "startDate": "2026-12-26",
+        "endDate": "2027-01-01",
+        "color": "bg-slate-100 border-slate-200 text-slate-800"
+    }
+]
