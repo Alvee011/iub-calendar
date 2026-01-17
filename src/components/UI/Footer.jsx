@@ -3,9 +3,9 @@ import { Mail } from 'lucide-react';
 
 export default function Footer() {
     return (
-        <footer className="mt-auto py-8 text-center text-slate-500 text-sm border-t border-slate-200 bg-slate-50/50">
+        <footer className="mt-auto py-8 text-center text-slate-500 dark:text-neutral-500 text-sm border-t border-slate-200 dark:border-neutral-800 bg-slate-50/50 dark:bg-black transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-3">
-                <p className="text-slate-700 font-medium">
+                <p className="text-slate-700 dark:text-neutral-400 font-medium">
                     © IUB Academic Calendar 2026 | Designed By Faruque Azam Alvee
                 </p>
 
@@ -13,7 +13,7 @@ export default function Footer() {
                     href="https://alvee.bio.link/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-bold hover:underline transition-colors"
+                    className="inline-flex items-center gap-2 text-blue-600 dark:text-sky-400 hover:text-blue-700 dark:hover:text-sky-300 font-bold hover:underline transition-colors"
                 >
                     <Mail size={16} />
                     Contact Me

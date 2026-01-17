@@ -8,34 +8,36 @@ export default function MonthView({ currentMonth, setCurrentMonth, events, onEve
     const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
 
     return (
-        <div className="space-y-2">
+        <div className="space-y-4">
             <div className="flex items-center justify-between px-2">
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-white">
                     {format(currentMonth, 'MMMM yyyy')}
                 </h2>
-                <div className="flex items-center gap-2">
+                <div className="flex gap-2">
                     <button
                         onClick={prevMonth}
-                        className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-600"
+                        className="p-2 hover:bg-slate-100 dark:hover:bg-neutral-800 rounded-lg text-slate-600 dark:text-neutral-400 transition-colors"
                         aria-label="Previous Month"
                     >
-                        <ChevronLeft size={24} />
+                        <ChevronLeft size={20} />
                     </button>
                     <button
                         onClick={nextMonth}
-                        className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-600"
+                        className="p-2 hover:bg-slate-100 dark:hover:bg-neutral-800 rounded-lg text-slate-600 dark:text-neutral-400 transition-colors"
                         aria-label="Next Month"
                     >
-                        <ChevronRight size={24} />
+                        <ChevronRight size={20} />
                     </button>
                 </div>
             </div>
 
-            <CalendarGrid
-                currentMonth={currentMonth}
-                events={events}
-                onEventClick={onEventClick}
-            />
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <CalendarGrid
+                    currentMonth={currentMonth}
+                    events={events}
+                    onEventClick={onEventClick}
+                />
+            </div>
         </div>
     );
 }

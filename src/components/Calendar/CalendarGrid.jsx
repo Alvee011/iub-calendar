@@ -1,6 +1,6 @@
 import React from 'react';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay, isToday, format } from 'date-fns';
-import { cn } from '../../lib/utils';
+import { cn, getDarkColorClasses } from '../../lib/utils';
 
 export default function CalendarGrid({ currentMonth, events, onEventClick }) {
     const monthStart = startOfMonth(currentMonth);
@@ -12,15 +12,15 @@ export default function CalendarGrid({ currentMonth, events, onEventClick }) {
     const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     return (
-        <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="w-full bg-white dark:bg-neutral-900 rounded-2xl shadow-sm border border-slate-200 dark:border-neutral-800 overflow-hidden">
             {/* Weekday Headers */}
-            <div className="grid grid-cols-7 border-b border-slate-100 bg-slate-50/50">
+            <div className="grid grid-cols-7 border-b border-slate-100 dark:border-neutral-800 bg-slate-50/50 dark:bg-black">
                 {weekDays.map(day => (
                     <div
                         key={day}
                         className={cn(
                             "py-2 text-center text-xs font-bold uppercase tracking-wider",
-                            day === 'Fri' ? "bg-[#ffe4e6] text-red-600" : "text-black"
+                            day === 'Fri' ? "bg-[#ffe4e6] dark:bg-red-900/30 text-red-600 dark:text-red-400" : "text-black dark:text-neutral-400"
                         )}
                     >
                         {day}
@@ -52,14 +52,14 @@ export default function CalendarGrid({ currentMonth, events, onEventClick }) {
                         <div
                             key={day.toString()}
                             className={cn(
-                                "min-h-[65px] sm:min-h-[90px] p-1 border-b border-r border-slate-100 flex flex-col relative transition-colors hover:bg-slate-50/50",
-                                !isSameMonth(day, monthStart) && "bg-slate-50/30 text-slate-400",
-                                isToday(day) && "bg-blue-50/30"
+                                "min-h-[65px] sm:min-h-[90px] p-1 border-b border-r border-slate-100 dark:border-neutral-800 flex flex-col relative transition-colors hover:bg-slate-50/50 dark:hover:bg-neutral-800",
+                                !isSameMonth(day, monthStart) && "bg-slate-50/30 dark:bg-neutral-900/50 text-slate-400 dark:text-neutral-600",
+                                isToday(day) && "bg-blue-50/30 dark:bg-blue-900/10"
                             )}
                         >
                             <span className={cn(
                                 "w-6 h-6 flex items-center justify-center rounded-full text-xs sm:text-sm font-medium mb-1",
-                                isToday(day) ? "bg-iub-blue text-white" : "text-slate-700"
+                                isToday(day) ? "bg-iub-blue dark:bg-sky-500 text-white" : "text-slate-700 dark:text-neutral-500"
                             )}>
                                 {format(day, 'd')}
                             </span>
@@ -72,7 +72,8 @@ export default function CalendarGrid({ currentMonth, events, onEventClick }) {
                                         className={cn(
                                             "text-left text-[10px] px-1.5 py-0.5 rounded border truncate w-full shadow-sm transition-transform hover:scale-[1.02] active:scale-95",
                                             event.color,
-                                            "opacity-90 hover:opacity-100"
+                                            getDarkColorClasses(event.color, event.type),
+                                            "opacity-90 hover:opacity-100 dark:opacity-100 dark:border"
                                         )}
                                     >
                                         {event.title}

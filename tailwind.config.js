@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -11,8 +12,8 @@ export default {
       },
       colors: {
         iub: {
-            blue: '#164e87',
-            green: '#207d43',
+          blue: '#164e87',
+          green: '#207d43',
         }
       }
     },

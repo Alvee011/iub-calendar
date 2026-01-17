@@ -1,6 +1,6 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
-import { cn } from '../../lib/utils';
+import { cn, getDarkColorClasses } from '../../lib/utils';
 import { BookOpen, GraduationCap, Calendar as CalendarIcon, ArrowRight } from 'lucide-react';
 
 const SemesterCard = ({ semester, events, onEventClick }) => {
@@ -20,7 +20,7 @@ const SemesterCard = ({ semester, events, onEventClick }) => {
     const sortedEvents = [...events].sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
     return (
-        <div className={cn("rounded-2xl border overflow-hidden transition-all duration-300 hover:shadow-lg bg-white", semesterColors[semester]?.replace('bg-', 'border-'))}>
+        <div className={cn("rounded-2xl border overflow-hidden transition-all duration-300 hover:shadow-lg bg-white dark:bg-neutral-900", semesterColors[semester]?.replace('bg-', 'border-').replace('text-', 'dark:text-white/90 text-'), "dark:border-neutral-800")}>
             <div className={cn("px-6 py-8 bg-gradient-to-br", headerColors[semester], "text-white")}>
                 <div className="flex items-center justify-between mb-2">
                     <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-semibold uppercase tracking-wider">
@@ -37,18 +37,18 @@ const SemesterCard = ({ semester, events, onEventClick }) => {
                     <button
                         key={event.id}
                         onClick={() => onEventClick(event)}
-                        className="w-full group flex items-start gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors text-left border border-transparent hover:border-slate-100"
+                        className="w-full group flex items-start gap-4 p-3 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors text-left border border-transparent hover:border-neutral-100 dark:hover:border-neutral-600"
                     >
-                        <div className={cn("shrink-0 w-12 h-12 rounded-lg flex flex-col items-center justify-center border", event.color)}>
+                        <div className={cn("shrink-0 w-12 h-12 rounded-lg flex flex-col items-center justify-center border dark:border-neutral-700", event.color, getDarkColorClasses(event.color, event.type))}>
                             <span className="text-xs font-bold uppercase">{format(parseISO(event.startDate), 'MMM')}</span>
                             <span className="text-lg font-bold leading-none">{format(parseISO(event.startDate), 'd')}</span>
                         </div>
 
                         <div className="flex-1 min-w-0 py-0.5">
-                            <h4 className="font-semibold text-slate-800 truncate group-hover:text-iub-blue transition-colors">
+                            <h4 className="font-semibold text-neutral-800 dark:text-neutral-100 truncate group-hover:text-iub-blue dark:group-hover:text-sky-400 transition-colors">
                                 {event.title}
                             </h4>
-                            <div className="flex items-center gap-2 mt-1 text-xs text-slate-500">
+                            <div className="flex items-center gap-2 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
                                 <span className="flex items-center gap-1">
                                     <CalendarIcon size={12} />
                                     {event.type}
@@ -63,7 +63,7 @@ const SemesterCard = ({ semester, events, onEventClick }) => {
                         </div>
 
                         <div className="self-center opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
-                            <ArrowRight size={16} className="text-slate-400" />
+                            <ArrowRight size={16} className="text-slate-400 dark:text-slate-500" />
                         </div>
                     </button>
                 ))}
