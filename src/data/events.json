@@ -80,6 +80,45 @@
         "color": "bg-stone-100 border-stone-200 text-stone-800"
     },
     {
+        "id": "spring-add-drop-2026",
+        "title": "ADD/DROP/Late Registration",
+        "semester": "Spring",
+        "type": "Registration",
+        "startDate": "2026-01-26",
+        "endDate": "2026-01-27",
+        "color": "bg-cyan-100 border-cyan-200 text-cyan-800",
+        "schedule": [
+            {
+                "date": "26 January 2026",
+                "program": "Undergraduate",
+                "slots": [
+                    {
+                        "time": "10:00am - 11:30am",
+                        "criteria": "0-30 credit hours"
+                    },
+                    {
+                        "time": "12:00 noon – 1.30pm",
+                        "criteria": "31 -65 credit hours"
+                    },
+                    {
+                        "time": "2:00pm – 3:30pm",
+                        "criteria": "66 and above"
+                    }
+                ]
+            },
+            {
+                "date": "27 January 2026",
+                "program": "Graduate",
+                "slots": [
+                    {
+                        "time": "10:00am - 3:30pm",
+                        "criteria": "All"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "shab-e-barat-2026",
         "title": "Shab-E-Barat**",
         "semester": "Spring",
