@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Calendar as CalendarIcon, List, Grid, Filter, Search, X, ArrowRight, Calendar, Clock } from 'lucide-react';
+import { Calendar as CalendarIcon, List, Grid, Filter, Search, X, ArrowRight, Calendar, Clock, Clipboard } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { useCalendarEvents } from './hooks/useCalendarEvents';
 import { useTheme } from './hooks/useTheme';
@@ -8,6 +8,7 @@ import HeroSection from './components/UI/HeroSection';
 import MonthView from './components/Calendar/MonthView';
 import SemesterView from './components/Semester/SemesterView';
 import ListView from './components/List/ListView';
+import RoutineMaker from './components/Routine/RoutineMaker';
 import EventModal from './components/UI/EventModal';
 import Filters from './components/UI/Filters';
 import Footer from './components/UI/Footer';
@@ -83,7 +84,8 @@ function App() {
               {[
                 { id: 'month', icon: CalendarIcon, label: 'Month' },
                 { id: 'semester', icon: Grid, label: 'Semester' },
-                { id: 'list', icon: List, label: 'List' }
+                { id: 'list', icon: List, label: 'List' },
+                { id: 'routine', icon: Clipboard, label: 'Routine Maker' }
               ].map(tab => (
                 <button
                   key={tab.id}
@@ -228,6 +230,10 @@ function App() {
                   events={events}
                   onEventClick={setSelectedEvent}
                 />
+              )}
+
+              {view === 'routine' && (
+                <RoutineMaker />
               )}
             </div>
           </>

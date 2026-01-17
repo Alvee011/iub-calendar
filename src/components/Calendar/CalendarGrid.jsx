@@ -20,7 +20,7 @@ export default function CalendarGrid({ currentMonth, events, onEventClick }) {
                         key={day}
                         className={cn(
                             "py-2 text-center text-xs font-bold uppercase tracking-wider",
-                            day === 'Fri' ? "bg-[#ffe4e6] dark:bg-red-900/30 text-red-600 dark:text-red-400" : "text-black dark:text-neutral-400"
+                            day === 'Fri' ? "bg-[#ffe4e6] dark:bg-red-900/30 text-red-600 dark:text-red-400" : "text-black dark:text-white"
                         )}
                     >
                         {day}
@@ -59,7 +59,7 @@ export default function CalendarGrid({ currentMonth, events, onEventClick }) {
                         >
                             <span className={cn(
                                 "w-6 h-6 flex items-center justify-center rounded-full text-xs sm:text-sm font-medium mb-1",
-                                isToday(day) ? "bg-iub-blue dark:bg-sky-500 text-white" : "text-slate-700 dark:text-neutral-500"
+                                isToday(day) ? "bg-iub-blue dark:bg-sky-500 text-white" : "text-slate-700 dark:text-white"
                             )}>
                                 {format(day, 'd')}
                             </span>
