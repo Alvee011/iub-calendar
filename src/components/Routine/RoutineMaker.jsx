@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import eventsData from '../../data/events.json';
 import { format, eachDayOfInterval, parseISO, getDay } from 'date-fns';
+import irasImage from '../../assets/iras.png';
 
 // Time slots as per user image
 const TIME_SLOTS = [
@@ -475,7 +476,7 @@ export default function RoutineMaker() {
                                         Copy the highlighted text from your iras semester wise registered courses and paste it above.
                                     </p>
                                     <div className="rounded-xl overflow-hidden border border-slate-200 dark:border-neutral-800">
-                                        <img src="/iras.png" alt="IRAS Instruction" className="w-full h-auto" />
+                                        <img src={irasImage} alt="IRAS Instruction" className="w-full h-auto" />
                                     </div>
                                 </div>
                             </div>
