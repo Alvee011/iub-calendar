@@ -467,8 +467,17 @@ export default function RoutineMaker() {
                                     value={importText}
                                     onChange={e => setImportText(e.target.value)}
                                     placeholder={`Paste your course text here...\nExample:\nMIS341 Computers in Business 1 BC4011 ST:09:40-11:10 0 / 0 Z`}
-                                    className="w-full h-64 bg-slate-50 dark:bg-neutral-950 border-2 border-slate-200 dark:border-neutral-800 rounded-2xl p-4 focus:ring-4 focus:ring-iub-blue/20 focus:border-iub-blue outline-none resize-none font-mono text-sm dark:text-white"
+                                    className="w-full h-64 bg-slate-50 dark:bg-neutral-950 border-2 border-slate-200 dark:border-neutral-800 rounded-2xl p-4 focus:ring-4 focus:ring-iub-blue/20 focus:border-iub-blue outline-none resize-none font-mono text-sm dark:text-white mb-4"
                                 />
+
+                                <div className="space-y-3">
+                                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                                        Copy the highlighted text from your iras semester wise registered courses and paste it above.
+                                    </p>
+                                    <div className="rounded-xl overflow-hidden border border-slate-200 dark:border-neutral-800">
+                                        <img src="/iras.png" alt="IRAS Instruction" className="w-full h-auto" />
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="p-6 border-t border-slate-100 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-950 flex justify-end gap-3">
