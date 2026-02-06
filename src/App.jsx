@@ -203,7 +203,11 @@ function App() {
           /* State: NO SEARCH (Normal View) */
           <>
             {view === 'month' && !showFilters && (
-              <HeroSection events={events} onEventClick={setSelectedEvent} />
+              <HeroSection
+                events={events}
+                onEventClick={setSelectedEvent}
+                onViewMore={() => setView('list')}
+              />
             )}
 
             <Filters filters={filters} isOpen={showFilters} />
@@ -220,14 +224,14 @@ function App() {
 
               {view === 'semester' && (
                 <SemesterView
-                  events={events}
+                  events={events.filter(e => e.type !== 'Class')}
                   onEventClick={setSelectedEvent}
                 />
               )}
 
               {view === 'list' && (
                 <ListView
-                  events={events}
+                  events={events.filter(e => e.type !== 'Class')}
                   onEventClick={setSelectedEvent}
                 />
               )}

@@ -132,66 +132,124 @@ export default function EventModal({ event, isOpen, onClose }) {
                         </div>
                     </div>
 
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-1 leading-tight">{event.title}</h2>
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-1 leading-tight">{event.classDetails?.title || event.title}</h2>
                     <p className="text-sm font-medium text-slate-500 dark:text-neutral-400 mb-6">{event.semester} {event.type}</p>
 
-                    <div className="space-y-4">
-                        <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
-                            <Clock className="w-5 h-5 text-slate-400 dark:text-neutral-500 mt-0.5 shrink-0" />
-                            <div>
-                                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-0.5">Time</p>
-                                <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-                                    {format(startDate, 'MMMM d, yyyy')}
-                                    {!isOneDay && ` – ${format(endDate, 'MMMM d, yyyy')}`}
+                    {event.classDetails ? (
+                        <div className="space-y-4">
+                            <div className="p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
+                                <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                                    Room: {event.classDetails.room} <span className="mx-2 text-slate-300">|</span> Time: {event.classDetails.time}
                                 </p>
                             </div>
-                        </div>
 
-                        <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
-                            <Tag className="w-5 h-5 text-slate-400 dark:text-neutral-500 mt-0.5 shrink-0" />
-                            <div>
-                                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-1.5">Category</p>
-                                <div className="flex flex-wrap gap-2">
-                                    <span className={`px-2.5 py-1 rounded-md text-xs font-bold border ${theme.badge}`}>
-                                        {event.type}
-                                    </span>
-                                    <span className="px-2.5 py-1 rounded-md text-xs font-medium border bg-white dark:bg-neutral-800 border-slate-200 dark:border-neutral-700 text-slate-600 dark:text-neutral-300">
-                                        {event.semester}
-                                    </span>
+                            {event.classDetails.section !== 'N/A' && (
+                                <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
+                                    <Tag className="w-5 h-5 text-slate-400 dark:text-neutral-500 mt-0.5 shrink-0" />
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-0.5">Section</p>
+                                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                            {event.classDetails.section}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
+                                <Calendar className="w-5 h-5 text-slate-400 dark:text-neutral-500 mt-0.5 shrink-0" />
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-0.5">Date</p>
+                                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                        {format(startDate, 'MMMM d, yyyy')}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
+                                <Tag className="w-5 h-5 text-slate-400 dark:text-neutral-500 mt-0.5 shrink-0" />
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-1.5">Category</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className={`px-2.5 py-1 rounded-md text-xs font-bold border ${theme.badge}`}>
+                                            {event.type}
+                                        </span>
+                                        <span className="px-2.5 py-1 rounded-md text-xs font-medium border bg-white dark:bg-neutral-800 border-slate-200 dark:border-neutral-700 text-slate-600 dark:text-neutral-300">
+                                            {event.semester}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    ) : (
+                        // Standard Layout for non-class events
+                        <>
+                            {event.description && (
+                                <div className="mb-6 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
+                                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                                        {event.description}
+                                    </p>
+                                </div>
+                            )}
 
-                        {event.schedule && (
-                            <div className="mt-2 pt-2">
-                                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-3">Detailed Schedule</p>
-                                <div className="space-y-3">
-                                    {event.schedule.map((day, idx) => (
-                                        <div key={idx} className="bg-slate-50 dark:bg-neutral-800/30 rounded-xl p-3 border border-slate-100 dark:border-neutral-800">
-                                            <h4 className="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-2 pb-2 border-b border-slate-200 dark:border-neutral-700">
-                                                {day.date}
-                                            </h4>
-                                            <div className="space-y-2">
-                                                {day.slots.map((slot, sIdx) => (
-                                                    <div key={sIdx} className="flex justify-between text-sm items-start gap-4">
-                                                        <span className="text-slate-600 dark:text-neutral-400 font-medium shrink-0">{slot.time}</span>
-                                                        <span className="text-slate-800 dark:text-slate-300 text-right">{slot.criteria}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
+                            <div className="space-y-4">
+                                <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
+                                    <Clock className="w-5 h-5 text-slate-400 dark:text-neutral-500 mt-0.5 shrink-0" />
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-0.5">Time</p>
+                                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                            {format(startDate, 'MMMM d, yyyy')}
+                                            {!isOneDay && ` – ${format(endDate, 'MMMM d, yyyy')}`}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-100 dark:border-neutral-800">
+                                    <Tag className="w-5 h-5 text-slate-400 dark:text-neutral-500 mt-0.5 shrink-0" />
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-1.5">Category</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            <span className={`px-2.5 py-1 rounded-md text-xs font-bold border ${theme.badge}`}>
+                                                {event.type}
+                                            </span>
+                                            <span className="px-2.5 py-1 rounded-md text-xs font-medium border bg-white dark:bg-neutral-800 border-slate-200 dark:border-neutral-700 text-slate-600 dark:text-neutral-300">
+                                                {event.semester}
+                                            </span>
                                         </div>
-                                    ))}
+                                    </div>
                                 </div>
                             </div>
-                        )}
-                    </div>
+                        </>
+                    )}
+
+                    {event.schedule && (
+                        <div className="mt-2 pt-2">
+                            <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-500 mb-3">Detailed Schedule</p>
+                            <div className="space-y-3">
+                                {event.schedule.map((day, idx) => (
+                                    <div key={idx} className="bg-slate-50 dark:bg-neutral-800/30 rounded-xl p-3 border border-slate-100 dark:border-neutral-800">
+                                        <h4 className="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-2 pb-2 border-b border-slate-200 dark:border-neutral-700">
+                                            {day.date}
+                                        </h4>
+                                        <div className="space-y-2">
+                                            {day.slots.map((slot, sIdx) => (
+                                                <div key={sIdx} className="flex justify-between text-sm items-start gap-4">
+                                                    <span className="text-slate-600 dark:text-neutral-400 font-medium shrink-0">{slot.time}</span>
+                                                    <span className="text-slate-800 dark:text-slate-300 text-right">{slot.criteria}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Footer - Fixed */}
                 <div className="p-4 bg-slate-50 dark:bg-black border-t border-slate-100 dark:border-neutral-800 flex justify-end shrink-0">
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 bg-white dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 hover:bg-slate-50 dark:hover:bg-neutral-700 text-slate-900 dark:text-slate-100 rounded-lg text-sm font-medium transition-colors"
+                        className="px-4 py-2 bg-white dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 hover:border-slate-300 dark:hover:border-neutral-600 hover:bg-slate-50 dark:hover:bg-neutral-700 text-slate-900 dark:text-slate-100 rounded-lg text-sm font-medium transition-colors"
                     >
                         Close
                     </button>

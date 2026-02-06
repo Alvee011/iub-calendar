@@ -128,6 +128,25 @@
         "color": "bg-[#ffe4e6] border-red-200 text-red-800"
     },
     {
+        "id": "election-online-classes-2026",
+        "title": "Online Classes",
+        "description": "Due to the National Election 2026 scheduled for 12 February 2026, all classes at Independent University, Bangladesh (IUB) will be conducted online from 8 to 10 February 2026 to facilitate the voting process.",
+        "semester": "Spring",
+        "type": "Academic",
+        "startDate": "2026-02-08",
+        "endDate": "2026-02-10",
+        "color": "bg-blue-100 border-blue-200 text-blue-800"
+    },
+    {
+        "id": "national-election-2026",
+        "title": "National Parliament Election 2026",
+        "semester": "Spring",
+        "type": "Holiday",
+        "startDate": "2026-02-11",
+        "endDate": "2026-02-12",
+        "color": "bg-[#ffe4e6] border-red-200 text-red-800"
+    },
+    {
         "id": "shaheed-day-2026",
         "title": "Shaheed Day*",
         "semester": "Spring",

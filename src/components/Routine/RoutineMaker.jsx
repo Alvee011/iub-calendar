@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Plus, Trash2, Save, X, Clipboard, Calendar as CalendarIcon, Upload, Download } from 'lucide-react';
+import { Copy, Plus, Trash2, Save, X, Clipboard, Calendar as CalendarIcon, Upload, Download, CalendarPlus } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import html2canvas from 'html2canvas';
+import eventsData from '../../data/events.json';
+import { format, eachDayOfInterval, parseISO, getDay } from 'date-fns';
 
 // Time slots as per user image
 const TIME_SLOTS = [
@@ -35,6 +37,16 @@ const DAY_MAP = {
     'F': 'Friday' // Assuming F for Friday just in case
 };
 
+const DAY_INDEX_MAP = {
+    "Sunday": 0,
+    "Monday": 1,
+    "Tuesday": 2,
+    "Wednesday": 3,
+    "Thursday": 4,
+    "Friday": 5,
+    "Saturday": 6
+};
+
 export default function RoutineMaker() {
     const [courses, setCourses] = useState(() => {
         const saved = localStorage.getItem('routine_courses');
@@ -50,6 +62,10 @@ export default function RoutineMaker() {
     // Import Modal State
     const [showImport, setShowImport] = useState(false);
     const [importText, setImportText] = useState('');
+
+    // Add to Calendar Modal State
+    const [showCalendarModal, setShowCalendarModal] = useState(false);
+    const [selectedSemester, setSelectedSemester] = useState('Spring');
 
     useEffect(() => {
         localStorage.setItem('routine_courses', JSON.stringify(courses));
@@ -87,47 +103,51 @@ export default function RoutineMaker() {
         const newCourses = [];
 
         lines.forEach(line => {
-            // Regex to find pattern: CODE NAME ... ROOM TIME ...
-            // Example: BDS109 ... BC7002 ST:11:20-12:50 ...
-            // This is a bit loose because pasting from table can be messy tabs/spaces
-            // Strategy: Look for the time pattern first XX:xx:xx-xx:xx
-
+            // Regex to parse IRAS copied text
             const timePattern = /([A-Z]+):(\d{1,2}:\d{2}-\d{1,2}:\d{2})/;
             const match = line.match(timePattern);
 
             if (match) {
-                const dayCodes = match[1]; // e.g. ST
-                const timeString = match[2]; // e.g. 11:20-12:50
-
-                // formatting time string to match our slots roughly or just use as is
-                // For the grid to accept it, it needs to match TIME_SLOTS or we handle dynamic?
-                // The user image shows standard slots. Let's try to map or map closest.
-                // Actually the user image slot headers match perfectly with the text example: 11:20-12:50
-                // So we can map directly.
+                const dayCodes = match[1];
+                const timeString = match[2];
 
                 const days = [];
                 for (let char of dayCodes) {
                     if (DAY_MAP[char]) days.push(DAY_MAP[char]);
                 }
 
-                // Extract Course Code (First word usually)
-                const parts = line.trim().split(/\s+/);
-                const code = parts[0];
-
-                // Extract Room (Usually before the time pattern? or just look for room-like pattern?)
-                // User input: "BC7002 ST:..."
-                // let's look for the token immediately preceding the match index in the straight string
-
+                // Extract parts from the left side of the time pattern
                 const timeIndex = line.indexOf(match[0]);
                 const preTimePart = line.substring(0, timeIndex).trim();
-                const preTimeTokens = preTimePart.split(/\s+/);
-                const room = preTimeTokens[preTimeTokens.length - 1]; // Assume last token before time is room
+                const tokens = preTimePart.split(/\s+/);
+
+                const code = tokens[0];
+                let room = 'TBA';
+                let section = 'N/A';
+                let title = code;
+
+                if (tokens.length >= 4) {
+                    room = tokens[tokens.length - 1];
+                    section = tokens[tokens.length - 2];
+                    const titleTokens = tokens.slice(1, tokens.length - 2);
+                    title = titleTokens.join(' ');
+                } else if (tokens.length >= 3) {
+                    room = tokens[tokens.length - 1];
+                    const potentialSection = tokens[tokens.length - 2];
+                    if (/^\d+$/.test(potentialSection)) {
+                        section = potentialSection;
+                        title = tokens.slice(1, tokens.length - 2).join(' ');
+                    } else {
+                        title = tokens.slice(1, tokens.length - 1).join(' ');
+                    }
+                }
 
                 if (days.length > 0) {
                     newCourses.push({
                         id: Date.now() + Math.random().toString(),
                         code: code,
-                        name: code,
+                        name: title,
+                        section: section,
                         room: room,
                         timeSlot: normalizeTime(timeString),
                         days: days
@@ -143,18 +163,23 @@ export default function RoutineMaker() {
 
     // Helper to fix 09:40 to 9:40 if needed, or match exact string
     const normalizeTime = (t) => {
-        // The user pasted "09:40-11:10", grid likely wants "09:40-11:10"
-        // If user pasted "9:40...", pad it?
-        // Let's just return it. The grid matching logic below will be crucial.
-        // Actually, let's normalize strictly to the TIME_SLOTS constants if possible
-        // Or just allow custom times and place them in the nearest bucket? 
-        // For now, let's assume standard IUB slots.
-
         // Fix single digit hours: 8:00 -> 08:00
         return t.split('-').map(part => {
             const [h, m] = part.split(':');
             return `${h.padStart(2, '0')}:${m}`;
         }).join('-');
+    };
+
+    const convertTo12Hour = (timeRange) => {
+        if (!timeRange) return '';
+        return timeRange.split('-').map(part => {
+            const [h, m] = part.split(':');
+            let hour = parseInt(h);
+            const ampm = hour >= 12 ? 'pm' : 'am';
+            hour = hour % 12;
+            hour = hour ? hour : 12;
+            return `${hour}:${m} ${ampm}`;
+        }).join(' - ');
     };
 
     const [use24Hour, setUse24Hour] = useState(true);
@@ -180,7 +205,60 @@ export default function RoutineMaker() {
 
     const gridRef = React.useRef(null);
 
-    const clearAll = () => setCourses([]);
+    const clearAll = () => {
+        setCourses([]);
+        // Also clear calendar events
+        localStorage.removeItem('user_class_events');
+        window.dispatchEvent(new Event('calendar-update'));
+    };
+
+    const handleAddToCalendar = () => {
+        const semesterEvents = eventsData.filter(e => e.semester === selectedSemester && e.type === 'Academic');
+        const startEvent = semesterEvents.find(e => e.title.includes("Classes commence"));
+        const endEvent = semesterEvents.find(e => e.title.includes("Classes end"));
+
+        if (!startEvent || !endEvent) {
+            alert(`Could not find class start/end dates for ${selectedSemester} in events data.`);
+            return;
+        }
+
+        const startDate = parseISO(startEvent.startDate);
+        const endDate = parseISO(endEvent.endDate);
+
+        const newEvents = [];
+        const interval = eachDayOfInterval({ start: startDate, end: endDate });
+
+        courses.forEach(course => {
+            const dayIndices = course.days.map(d => DAY_INDEX_MAP[d]);
+
+            interval.forEach(date => {
+                if (dayIndices.includes(getDay(date))) {
+                    newEvents.push({
+                        id: `class-${course.id}-${format(date, 'yyyy-MM-dd')}`,
+                        title: `${course.code}`,
+                        // Structured Details for Custom Display
+                        classDetails: {
+                            time: convertTo12Hour(course.timeSlot),
+                            room: course.room || 'TBA',
+                            section: course.section || 'N/A',
+                            title: course.name || course.code
+                        },
+                        semester: selectedSemester,
+                        type: 'Class',
+                        startDate: format(date, 'yyyy-MM-dd'),
+                        endDate: format(date, 'yyyy-MM-dd'),
+                        color: 'bg-indigo-50 border-indigo-200 text-indigo-800'
+                    });
+                }
+            });
+        });
+
+        localStorage.setItem('user_class_events', JSON.stringify(newEvents));
+        window.dispatchEvent(new Event('calendar-update'));
+
+        setShowCalendarModal(false);
+        alert(`Successfully added ${newEvents.length} class sessions to your calendar!`);
+    };
 
     const handleDownload = async () => {
         if (gridRef.current) {
@@ -204,7 +282,6 @@ export default function RoutineMaker() {
 
     return (
         <div className="animate-in fade-in duration-500">
-            {/* Header / Actions */}
             {/* Header / Actions */}
             <div className="mb-8 grid grid-cols-1 xl:grid-cols-4 gap-6 items-start">
                 <div className="xl:col-span-3 w-full p-6 bg-white dark:bg-neutral-900 rounded-3xl border border-slate-100 dark:border-neutral-800 shadow-sm">
@@ -303,12 +380,9 @@ export default function RoutineMaker() {
                                     {day}
                                 </td>
                                 {TIME_SLOTS.map(slot => {
-                                    // Find course for this day and slot
-                                    // Logic: course.days includes day AND course.timeSlot matches slot
                                     const course = courses.find(c =>
                                         c.days.includes(day) &&
                                         (c.timeSlot === slot || c.timeSlot.replace(/^0/, '') === slot.replace(/^0/, ''))
-                                        // relaxed match for leading zeros
                                     );
 
                                     return (
@@ -353,6 +427,14 @@ export default function RoutineMaker() {
                 >
                     <Download size={18} />
                     <span>Save Image</span>
+                </button>
+                <button
+                    onClick={() => setShowCalendarModal(true)}
+                    disabled={courses.length === 0}
+                    className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold shadow-lg shadow-indigo-500/20 transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <CalendarPlus size={18} />
+                    <span>Add to Calendar</span>
                 </button>
             </div>
 
@@ -402,6 +484,64 @@ export default function RoutineMaker() {
                                     className="px-6 py-2.5 font-bold bg-iub-blue text-white rounded-xl shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     Generate Routine
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Add to Calendar Modal */}
+            <AnimatePresence>
+                {showCalendarModal && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className="bg-white dark:bg-neutral-900 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden"
+                        >
+                            <div className="p-6 border-b border-slate-100 dark:border-neutral-800 flex justify-between items-center">
+                                <h3 className="text-xl font-bold">Add to Calendar</h3>
+                                <button onClick={() => setShowCalendarModal(false)} className="p-2 hover:bg-slate-100 dark:hover:bg-neutral-800 rounded-full transition-colors">
+                                    <X size={20} />
+                                </button>
+                            </div>
+
+                            <div className="p-6">
+                                <p className="text-sm text-slate-500 dark:text-neutral-400 mb-4">
+                                    Select the semester to generate calendar events for your routine.
+                                </p>
+                                <div className="space-y-3">
+                                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Semester</label>
+                                    <select
+                                        value={selectedSemester}
+                                        onChange={(e) => setSelectedSemester(e.target.value)}
+                                        className="w-full bg-slate-50 dark:bg-neutral-800 border-transparent rounded-xl px-4 py-3 outline-none dark:text-white"
+                                    >
+                                        <option value="Spring">Spring</option>
+                                        <option value="Summer">Summer</option>
+                                        <option value="Autumn">Autumn</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="p-6 border-t border-slate-100 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-950 flex justify-end gap-3">
+                                <button
+                                    onClick={() => setShowCalendarModal(false)}
+                                    className="px-6 py-2.5 font-bold text-slate-600 hover:bg-slate-200 dark:text-slate-400 dark:hover:bg-neutral-800 rounded-xl transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handleAddToCalendar}
+                                    className="px-6 py-2.5 font-bold bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-500/20 hover:bg-indigo-700 transition-all active:scale-95"
+                                >
+                                    Confirm
                                 </button>
                             </div>
                         </motion.div>

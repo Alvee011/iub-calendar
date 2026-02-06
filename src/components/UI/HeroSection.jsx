@@ -3,7 +3,7 @@ import { format, parseISO, isAfter, startOfDay } from 'date-fns';
 import { Calendar, ArrowRight, AlertCircle } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
-export default function HeroSection({ events, onEventClick }) {
+export default function HeroSection({ events, onEventClick, onViewMore }) {
     // Find the next 3 upcoming events
     const upcomingEvents = useMemo(() => {
         const today = startOfDay(new Date());
@@ -71,7 +71,11 @@ export default function HeroSection({ events, onEventClick }) {
                                         {format(parseISO(primaryEvent.startDate), 'EEEE')}
                                     </span>
                                     <span className="text-sm opacity-70">
-                                        {primaryEvent.startDate !== primaryEvent.endDate ? `Until ${format(parseISO(primaryEvent.endDate), 'MMM d')}` : 'All Day'}
+                                        {primaryEvent.classDetails?.time
+                                            ? primaryEvent.classDetails.time
+                                            : (primaryEvent.startDate !== primaryEvent.endDate
+                                                ? `Until ${format(parseISO(primaryEvent.endDate), 'MMM d')}`
+                                                : 'All Day')}
                                     </span>
                                 </div>
                             </div>
@@ -105,12 +109,15 @@ export default function HeroSection({ events, onEventClick }) {
                         </button>
                     ))}
 
-                    <div className="relative overflow-hidden rounded-2xl border border-slate-100 dark:border-slate-800">
-                        <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md transition-colors" />
-                        <div className="relative h-full flex items-center justify-center text-slate-500 dark:text-neutral-500 text-xs font-medium p-3">
+                    <button
+                        onClick={onViewMore}
+                        className="relative overflow-hidden rounded-2xl border border-slate-100 dark:border-slate-800 w-full group hover:border-iub-blue/50 transition-colors"
+                    >
+                        <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md transition-colors group-hover:bg-white/60 dark:group-hover:bg-black/60" />
+                        <div className="relative h-full flex items-center justify-center text-slate-500 dark:text-neutral-500 text-xs font-medium p-3 group-hover:text-iub-blue dark:group-hover:text-sky-400 transition-colors">
                             More events coming up...
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
