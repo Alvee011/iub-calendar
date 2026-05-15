@@ -252,7 +252,60 @@
         "type": "Registration",
         "startDate": "2026-05-10",
         "endDate": "2026-05-12",
-        "color": "bg-white border-slate-200 text-slate-800"
+        "color": "bg-white border-slate-200 text-slate-800",
+        "schedule": [
+            {
+                "date": "10 May 2026",
+                "slots": [
+                    {
+                        "time": "09:45am – 11:00am",
+                        "criteria": "105 Credit hours and above"
+                    },
+                    {
+                        "time": "11:20am – 12:35pm",
+                        "criteria": "85-104 Credit hours"
+                    },
+                    {
+                        "time": "12:55pm – 2:10pm",
+                        "criteria": "70-84 Credit hours"
+                    },
+                    {
+                        "time": "2:30pm – 3:45pm",
+                        "criteria": "55-69 Credit hours"
+                    }
+                ]
+            },
+            {
+                "date": "11 May 2026",
+                "slots": [
+                    {
+                        "time": "09:45am – 11:00am",
+                        "criteria": "40-54 Credit hours"
+                    },
+                    {
+                        "time": "11:20am – 12:35pm",
+                        "criteria": "30-39 Credit hours"
+                    },
+                    {
+                        "time": "12:55pm – 2:10pm",
+                        "criteria": "16-29 Credit hours"
+                    },
+                    {
+                        "time": "2:30pm – 3:45pm",
+                        "criteria": "0 - 15 Credit hours"
+                    }
+                ]
+            },
+            {
+                "date": "12 May 2026",
+                "slots": [
+                    {
+                        "time": "10:30am - 3:00pm",
+                        "criteria": "Reserved"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": "summer-classes-start-2026",
@@ -271,6 +324,35 @@
         "startDate": "2026-05-18",
         "endDate": "2026-05-18",
         "color": "bg-stone-100 border-stone-200 text-stone-800"
+    },
+    {
+        "id": "summer-add-drop-2026",
+        "title": "ADD/DROP/Late Registration",
+        "semester": "Summer",
+        "type": "Registration",
+        "startDate": "2026-05-21",
+        "endDate": "2026-05-21",
+        "color": "bg-white border-slate-200 text-slate-800",
+        "schedule": [
+            {
+                "date": "21 May 2026",
+                "program": "Undergraduate",
+                "slots": [
+                    {
+                        "time": "10:30am - 12:00 noon",
+                        "criteria": "0-30 credit hours"
+                    },
+                    {
+                        "time": "12:20 pm - 1.50pm",
+                        "criteria": "31 -65 credit hours"
+                    },
+                    {
+                        "time": "2:10pm - 3:40pm",
+                        "criteria": "66 and above"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": "eid-ul-azha-2026",
